@@ -17,3 +17,12 @@ func Repeat2(character string) string {
 	}
 	return repeated
 }
+
+func Repeat3(character string,repeatCount2 int) string {
+	var repeated string
+	for i := 0; i < repeatCount2; i++ {
+		repeated += character
+	}
+	return repeated
+}
+

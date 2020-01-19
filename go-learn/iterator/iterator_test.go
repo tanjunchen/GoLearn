@@ -16,3 +16,12 @@ func BenchmarkRepeat2(b *testing.B) {
 		Repeat2("a")
 	}
 }
+
+func TestRepeat3(t *testing.T) {
+	var count = 10
+	repeated := Repeat3("a", count)
+	expected := "aaaaaaaaaa"
+	if repeated != expected {
+		t.Errorf("expected '%q' but got '%q'", expected, repeated)
+	}
+}
