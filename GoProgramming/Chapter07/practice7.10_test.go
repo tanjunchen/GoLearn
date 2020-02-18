@@ -6,62 +6,34 @@ import (
 	"testing"
 )
 
-type book struct {
-	name   string
-	price  float64
-	author string
-}
+func IsPalindrome(s sort.Interface) bool {
+	if s.Len() == 0 {
+		return false
+	}
 
-type byFunc func(i, j int) bool
-type tableSlice struct {
-	lists    []*book
-	lessFunc []byFunc
-}
-
-func (ts tableSlice) Len() int {
-	return len(ts.lists)
-}
-
-func (ts tableSlice) Swap(i, j int) {
-	ts.lists[i], ts.lists[j] = ts.lists[j], ts.lists[i]
-}
-
-func (ts tableSlice) Less(i, j int) bool {
-	for t := len(ts.lessFunc) - 1; t >= 0; t-- {
-		if ts.lessFunc[t](i, j) {
-			return true
-		} else if !ts.lessFunc[t](j, i) {
-			continue
+	i, j := 0, s.Len()-1
+	for i < j {
+		if !s.Less(i, j) && !s.Less(j, i) {
+			i++
+			j--
+		} else {
+			return false
 		}
 	}
-	return false
+	return true
 }
 
-func (ts tableSlice) byName(i, j int) bool {
-	return ts.lists[i].name < ts.lists[j].name
-}
-func (ts tableSlice) byPrice(i, j int) bool {
-	return ts.lists[i].price < ts.lists[j].price
+func Test079(t *testing.T) {
+	start001()
 }
 
-func start() {
-	book1 := book{"GoLang", 65.50, "Aideng"}
-	book2 := book{"PHP", 45.50, "Sombody"}
-	book3 := book{"C", 45.00, "Tan"}
-
-	ts := tableSlice{
-		lists: []*book{&book1, &book2, &book3},
-	}
-
-	ts.lessFunc = []byFunc{ts.byPrice, ts.byName}
-
-	sort.Sort(ts)
-	for _, book := range ts.lists {
-		fmt.Println(*book)
-	}
-
-}
-
-func Test078(t *testing.T) {
-	start()
+func start001() {
+	a := []int{1, 2, 3, 2, 1}
+	fmt.Println(IsPalindrome(sort.IntSlice(a))) // true
+	a = []int{2, 1, 3, 4, 5}
+	fmt.Println(IsPalindrome(sort.IntSlice(a))) //false
+	a = []int{1}
+	fmt.Println(IsPalindrome(sort.IntSlice(a))) // true
+	a = []int{}
+	fmt.Println(IsPalindrome(sort.IntSlice(a))) // false
 }

@@ -15,8 +15,8 @@ limitations under the License.
 */
 package main
 
-import golearn "go-learn/go-learn"
+import "go-learn/GoProgramming/Chapter08"
 
 func main() {
-	golearn.ReadAllFiles3("D:\\Go-Leetcode")
+	Chapter08.Start()
 }

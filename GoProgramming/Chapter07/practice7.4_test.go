@@ -1,41 +1,47 @@
 package Chapter01
 
 import (
-	"bytes"
 	"fmt"
+	"io"
+	"testing"
 )
 
-type tree struct {
-	Val   int
-	Left  *tree
-	Right *tree
+func Test074(t *testing.T) {
+	str := "Hello World"
+	sr := NewReader(str)
+	data := make([]byte, 10)
+	n, err := sr.Read(data)
+	for err == nil {
+		fmt.Println(n, string(data[0:n]))
+		n, err = sr.Read(data)
+	}
 }
 
-func (t *tree) String() string {
-	var deque []*tree
-	var result []int
-	deque = append(deque, t)
-	for len(deque) > 0 {
-		current := deque[0]
-		deque = deque[1:]
-		if current.Left != nil {
-			deque = append(deque, current.Left)
-		}
-		if current.Right != nil {
-			deque = append(deque, current.Right)
-		}
-		result = append(result, current.Val)
-	}
-
-	var buf bytes.Buffer
-	buf.Write([]byte("{"))
-	for i, v := range result {
-		if i == len(result)-1 {
-			buf.Write([]byte(fmt.Sprintf("%d", v)))
-		} else {
-			buf.Write([]byte(fmt.Sprintf("%d, ", v)))
-		}
-	}
-	buf.Write([]byte("}"))
-	return buf.String()
+type StringReader struct {
+	data string
+	n    int
 }
+
+func (sr *StringReader) Read(b []byte) (int, error) {
+	data := []byte(sr.data)
+	if sr.n >= len(data) {
+		return 0, io.EOF
+	}
+	n := 0
+	if len(b) >= len(data) {
+		n = copy(b, data)
+		sr.n = sr.n + n
+		return n, nil
+	}
+	data = data[sr.n:]
+	n = copy(b, data)
+	sr.n = sr.n + n
+	return n, nil
+}
+
+func NewReader(in string) *StringReader {
+	sr := new(StringReader)
+	sr.data = in
+	return sr
+}
+

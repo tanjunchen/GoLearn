@@ -1,5 +1,1 @@
 package gomegatest
-
-func ()  {
-	
-}

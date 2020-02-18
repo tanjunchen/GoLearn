@@ -2,54 +2,66 @@ package Chapter01
 
 import (
 	"fmt"
-	"io"
-	"os"
+	"sort"
 	"testing"
 )
 
-type LimitedReader struct {
-	Reader  io.Reader
-	Limit   int
-	current int
+type book struct {
+	name   string
+	price  float64
+	author string
 }
 
-func (r *LimitedReader) Read(b []byte) (int, error) {
-	if r.current >= r.Limit {
-		return 0, io.EOF
-	}
-
-	if r.current+len(b) > r.Limit {
-		b = b[:r.Limit-r.current]
-	}
-
-	n, err := r.Reader.Read(b)
-	if err != nil {
-		return n, err
-	}
-	r.current += n
-	return n, nil
+type byFunc func(i, j int) bool
+type tableSlice struct {
+	lists    []*book
+	lessFunc []byFunc
 }
 
-func LimitReader(r io.Reader, limit int) io.Reader {
-	lr := LimitedReader{
-		Reader: r,
-		Limit:  limit,
-	}
-	return &lr
+func (ts tableSlice) Len() int {
+	return len(ts.lists)
 }
 
-func Test075(t *testing.T) {
-	file, err := os.Open("limit.txt") // 1234567890
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+func (ts tableSlice) Swap(i, j int) {
+	ts.lists[i], ts.lists[j] = ts.lists[j], ts.lists[i]
+}
 
-	lr := LimitReader(file, 5)
-	buf := make([]byte, 10)
-	n, err := lr.Read(buf)
-	if err != nil {
-		panic(err)
+func (ts tableSlice) Less(i, j int) bool {
+	for t := len(ts.lessFunc) - 1; t >= 0; t-- {
+		if ts.lessFunc[t](i, j) {
+			return true
+		} else if !ts.lessFunc[t](j, i) {
+			continue
+		}
 	}
-	fmt.Println(n, buf) // 5 [49 50 51 52 53 0 0 0 0 0]
+	return false
+}
+
+func (ts tableSlice) byName(i, j int) bool {
+	return ts.lists[i].name < ts.lists[j].name
+}
+func (ts tableSlice) byPrice(i, j int) bool {
+	return ts.lists[i].price < ts.lists[j].price
+}
+
+func start() {
+	book1 := book{"GoLang", 65.50, "Aideng"}
+	book2 := book{"PHP", 45.50, "Sombody"}
+	book3 := book{"C", 45.00, "Tan"}
+
+	ts := tableSlice{
+		lists: []*book{&book1, &book2, &book3},
+	}
+
+	ts.lessFunc = []byFunc{ts.byPrice, ts.byName}
+
+	sort.Sort(ts)
+	for _, book := range ts.lists {
+		fmt.Println(*book)
+	}
+
+}
+
+func Test078(t *testing.T) {
+	start()
 }
