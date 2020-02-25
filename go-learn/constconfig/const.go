@@ -59,7 +59,7 @@ const (
 	Nonewprivs
 	// NonRoot runs with a default user of 1234
 	NonRoot
-	// Pause - when these values are updated, also update cmd/kubelet/app/options/container_runtime.go
+	// Pause - when these values are updated, also update go-cobra/kubelet/app/options/container_runtime.go
 	// Pause image
 	Pause
 	// Perl image

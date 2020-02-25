@@ -1,4 +1,4 @@
-package go_learn
+package fileoperation
 
 import (
 	"fmt"

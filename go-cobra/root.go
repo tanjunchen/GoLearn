@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package cmd
+package go_cobra
 
 import (
 	"fmt"
@@ -34,14 +34,14 @@ var rootCmd = &cobra.Command{
 	Use:   ".",
 	Short: "A brief description of your application",
 	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+examples and usage of using your application. For controll-loop:
 
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
+	//	Run: func(go-cobra *cobra.Command, args []string) { },
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(name) == 0 {
 			fmt.Println("no name")
