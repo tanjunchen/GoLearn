@@ -34,7 +34,7 @@ func NewPlayerServer(store PlayerStore) *PlayerServer {
 }
 
 func (p *PlayerServer) leagueHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("content-type", "application/json")
+	w.Header().Set("content-type", "application/jsontest")
 	json.NewEncoder(w).Encode(p.store.GetLeague())
 	w.WriteHeader(http.StatusOK)
 }
@@ -95,7 +95,7 @@ type Player struct {
 	Wins int
 }
 
-const jsonContentType = "application/json"
+const jsonContentType = "application/jsontest"
 
 
 func assertContentType(t *testing.T, response *httptest.ResponseRecorder, want string) {

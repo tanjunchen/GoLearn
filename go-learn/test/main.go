@@ -1,13 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 func main() {
-	eps := newString()
-	eps.Insert("AAA")
-	eps.Insert("AAA")
-	eps.Insert("AAA")
-	fmt.Println(eps)
+	value := rand.Int31()
+	uniqueName := fmt.Sprintf("%s-%08x", "BB", value)
+	fmt.Println(value, uniqueName)
 }
 
 // NewString creates a String from a list of values.

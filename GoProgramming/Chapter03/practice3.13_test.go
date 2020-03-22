@@ -39,6 +39,6 @@ func comma6(s string) {
 
 func Test0313(t *testing.T) {
 	comma6("12345")
-	comma6("12345.1")
-	comma6("-12345.1")
+	comma6("12345.hello")
+	comma6("-12345.hello")
 }

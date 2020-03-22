@@ -26,7 +26,7 @@ func GetSHA256HashCode(message []byte) string {
 func diffrent() {
 	var r1 bytes.Buffer
 	writer := bufio.NewWriter(&r1)
-	fmt.Fprintf(writer, "%08b", sha256.Sum256([]byte("1")))
+	fmt.Fprintf(writer, "%08b", sha256.Sum256([]byte("hello")))
 	writer.Flush()
 	r1Str := r1.String()
 

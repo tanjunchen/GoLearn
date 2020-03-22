@@ -79,7 +79,7 @@ func TestLeague(t *testing.T) {
 
 		assertStatus(t, response.Code, http.StatusOK)
 		assertLeague(t, got, wantedLeague)
-		assertContentType(t,response,"application/json")
+		assertContentType(t,response,"application/jsontest")
 	})
 }
 

@@ -30,7 +30,7 @@ func start012() {
 
 var musicList = template.Must(template.New("musiclist").Parse(`
 <h1>Track List</h1>
-<table border=1>
+<table border=hello>
 <tr style='text-align: left'>
   <th><a href='/?o=Title'>Title</a></th>
   <th><a href='/?o=Artist'>Artist</a></th>

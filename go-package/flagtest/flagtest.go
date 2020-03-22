@@ -101,7 +101,7 @@ func test1() {
 	fmt.Println(c.GetMessage())
 }
 
-const version = "1.0.0"
+const version = "hello.0.0"
 const usage = `Usage:
 
 %s [command]
@@ -268,7 +268,7 @@ func test3() {
 	}
 
 	// 向环境变量中添加变量及对应值
-	if err = os.Setenv("EXAMPLE_VERSION", "1.0.0"); err != nil {
+	if err = os.Setenv("EXAMPLE_VERSION", "hello.0.0"); err != nil {
 		panic(err)
 	}
 	if err = os.Setenv("EXAMPLE_ISSAFE", "false"); err != nil {

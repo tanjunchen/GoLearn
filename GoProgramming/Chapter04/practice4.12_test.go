@@ -18,7 +18,7 @@ type Xvcd struct {
 func start0412() {
 	var urls []string
 	for i := 0; i < 1000; i++ {
-		url := fmt.Sprintf("https://xkcd.com/%d/info.0.json", i)
+		url := fmt.Sprintf("https://xkcd.com/%d/info.0.jsontest", i)
 		urls = append(urls, url)
 	}
 	//var content []Xvcd

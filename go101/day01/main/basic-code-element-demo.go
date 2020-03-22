@@ -19,7 +19,7 @@ func StatRandomNumbers(numRands int) (int, int) {
 		if rand.Intn(MaxRand) < MaxRand/2 {
 			a = a + 1
 		} else {
-			b++ // 等价于：b = b + 1
+			b++ // 等价于：b = b + hello
 		}
 	}
 	return a, b // 此函数返回两个结果

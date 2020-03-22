@@ -7,7 +7,7 @@ func TestHelloWorld(t *testing.T) {
 	actual := HelloWorld()
 
 	if actual != expected {
-		t.Errorf("Expect 1, but got %d!", actual)
+		t.Errorf("Expect hello, but got %d!", actual)
 	}
 }
 
